@@ -305,6 +305,8 @@
   .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
   @media(max-width:920px){.contact-grid{grid-template-columns:1fr;gap:40px}}
   .contact-card{background:var(--c-blanc);border:1px solid var(--c-bordure);border-radius:var(--r-lg);padding:32px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:16px}
+  .tally-card{padding:22px 24px}
+  .tally-card iframe{display:block;width:100%;border:0;min-height:480px}
   .field{display:flex;flex-direction:column;gap:7px}
   .field label{font-size:.82rem;font-weight:600;color:var(--c-prune)}
   .field input,.field textarea{font:inherit;color:var(--c-prune);background:var(--c-creme);border:1.5px solid var(--c-bordure);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s;resize:vertical}
@@ -700,50 +702,10 @@
       </ul>
     </div>
     <div class="reveal d1">
-      <form class="contact-card" id="contactForm" novalidate>
-        <div class="frow">
-          <div class="field">
-            <label for="cf-nom">Nom</label>
-            <input id="cf-nom" name="nom" type="text" autocomplete="family-name" placeholder="Votre nom" />
-          </div>
-          <div class="field">
-            <label for="cf-prenom">Prénom</label>
-            <input id="cf-prenom" name="prenom" type="text" autocomplete="given-name" placeholder="Votre prénom" />
-          </div>
-        </div>
-        <div class="field">
-          <label for="cf-email">Email *</label>
-          <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="vous@exemple.fr" />
-        </div>
-        <div class="frow">
-          <div class="field">
-            <label for="cf-tel">Téléphone</label>
-            <input id="cf-tel" name="telephone" type="tel" autocomplete="tel" placeholder="06 12 34 56 78" />
-          </div>
-          <div class="field">
-            <label for="cf-soc">Entreprise</label>
-            <input id="cf-soc" name="entreprise" type="text" autocomplete="organization" placeholder="Nom de votre société" />
-          </div>
-        </div>
-        <div class="field">
-          <label for="cf-cabinet">Quel cabinet vous accompagne ?</label>
-          <input id="cf-cabinet" name="cabinet" type="text" placeholder="Nom de votre cabinet d'expertise comptable" />
-        </div>
-        <div class="field">
-          <label for="cf-msg">Votre besoin (facultatif)</label>
-          <textarea id="cf-msg" name="message" rows="3" placeholder="Dites-nous en quelques mots ce que vous recherchez."></textarea>
-        </div>
-        <label class="consent">
-          <input id="cf-rgpd" name="consent" type="checkbox" required />
-          <span>J'accepte d'être recontacté(e) au sujet de CENSE. Mes données sont traitées conformément au RGPD.</span>
-        </label>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Envoyer ma demande<span class="arr">→</span></button>
-        <p class="form-note">* Champs obligatoires</p>
-      </form>
-      <div class="contact-done" id="contactDone" hidden>
-        <div class="done-ic">✓</div>
-        <h3>Merci, c'est noté.</h3>
-        <p>Nous avons bien reçu votre demande et revenons vers vous rapidement.</p>
+      <div class="contact-card tally-card">
+        <iframe data-tally-src="https://tally.so/embed/81r9NY?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
+          loading="lazy" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0"
+          title="CENSE – Demander une démo"></iframe>
       </div>
     </div>
   </div>
@@ -1097,6 +1059,12 @@
   document.querySelectorAll('[data-modal]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openModal(b.dataset.modal);}));
   document.querySelectorAll('.modal [data-close]').forEach(x=>x.addEventListener('click',closeModals));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModals();});
+</script>
+
+<!-- Tally.so : chargement et redimensionnement automatique du formulaire intégré -->
+<script>
+  var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc;});};
+  if("undefined"!=typeof Tally){v();}else if(null==d.querySelector('script[src="'+w+'"]')){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}
 </script>
 
 </body>
