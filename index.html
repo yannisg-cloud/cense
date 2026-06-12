@@ -4,10 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ============================================================
-     CONSENT MODE v2 - valeurs par defaut (AVANT tout chargement)
-     Tout est refuse tant que le visiteur n'a pas donne son accord.
-     ============================================================ -->
+<!-- Consent Mode v2 — refus par défaut, mise à jour au choix du visiteur -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -20,7 +17,6 @@
     'security_storage': 'granted',
     'wait_for_update': 500
   });
-  // Reprend le choix deja enregistre (visiteur de retour)
   (function(){
     try {
       if (localStorage.getItem('cookie-consent') === 'accepted') {
@@ -35,30 +31,29 @@
   })();
 </script>
 
-<!-- Google Tag Manager : remplacer GTM-KMTMVQDX par l'ID reel du conteneur -->
+<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KMTMVQDX');</script>
-<!-- Fin Google Tag Manager -->
 
 <title>CENSE — Plateforme agréée de facturation électronique & gestion</title>
-<meta name="description" content="CENSE est la plateforme agréée et certifiée DGFiP qui centralise votre gestion : facturation électronique, trésorerie et pilotage, en lien direct avec votre expert-comptable." />
-<meta name="keywords" content="facturation électronique, plateforme agréée DGFiP, e-invoicing, expert-comptable, gestion d'entreprise, trésorerie, pilotage d'activité, coffre-fort à valeur probante, devis et factures, réforme facturation 2026" />
+<meta name="description" content="CENSE héberge une plateforme agréée de facturation électronique qui centralise votre gestion : trésorerie et pilotage d'activité, en lien direct avec votre expert-comptable." />
+<meta name="keywords" content="facturation électronique, e-invoicing, expert-comptable, gestion d'entreprise, trésorerie, pilotage d'activité, coffre-fort à valeur probante, devis et factures, réforme facturation 2026" />
 <meta name="author" content="CENSE" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="theme-color" content="#300d35" />
-<link rel="canonical" href="https://yannisg-cloud.github.io/cense/" />
+<link rel="canonical" href="https://cense.fr/" />
 
 <!-- Open Graph (partage Facebook/LinkedIn) -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="CENSE" />
 <meta property="og:locale" content="fr_FR" />
-<meta property="og:url" content="https://yannisg-cloud.github.io/cense/" />
+<meta property="og:url" content="https://cense.fr/" />
 <meta property="og:title" content="CENSE — Plateforme agréée de facturation électronique & gestion" />
-<meta property="og:description" content="Centralisez votre gestion : facturation électronique, trésorerie et pilotage, en lien direct avec votre expert-comptable. Plateforme agréée et certifiée DGFiP." />
-<meta property="og:image" content="https://yannisg-cloud.github.io/cense/og-image.jpg" />
+<meta property="og:description" content="Centralisez votre gestion : facturation électronique, trésorerie et pilotage, en lien direct avec votre expert-comptable. CENSE héberge une plateforme agréée." />
+<meta property="og:image" content="https://cense.fr/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="CENSE — Plateforme agréée de gestion et de facturation électronique" />
@@ -67,7 +62,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="CENSE — Plateforme agréée de facturation électronique & gestion" />
 <meta name="twitter:description" content="Centralisez votre gestion : facturation électronique, trésorerie et pilotage, aux côtés de votre expert-comptable." />
-<meta name="twitter:image" content="https://yannisg-cloud.github.io/cense/og-image.jpg" />
+<meta name="twitter:image" content="https://cense.fr/og-image.jpg" />
 
 <!-- Données structurées (JSON-LD) -->
 <script type="application/ld+json">
@@ -76,19 +71,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://yannisg-cloud.github.io/cense/#website",
-      "url": "https://yannisg-cloud.github.io/cense/",
+      "@id": "https://cense.fr/#website",
+      "url": "https://cense.fr/",
       "name": "CENSE",
       "description": "Plateforme agréée de facturation électronique et de gestion d'entreprise, en lien avec votre expert-comptable.",
       "inLanguage": "fr-FR",
-      "publisher": { "@id": "https://yannisg-cloud.github.io/cense/#organization" }
+      "publisher": { "@id": "https://cense.fr/#organization" }
     },
     {
       "@type": "Organization",
-      "@id": "https://yannisg-cloud.github.io/cense/#organization",
+      "@id": "https://cense.fr/#organization",
       "name": "CENSE",
-      "url": "https://yannisg-cloud.github.io/cense/",
-      "logo": "https://yannisg-cloud.github.io/cense/og-image.jpg",
+      "url": "https://cense.fr/",
+      "logo": "https://cense.fr/og-image.jpg",
       "description": "CENSE est la plateforme de gestion agréée qui centralise facturation électronique, trésorerie et pilotage, en collaboration avec votre expert-comptable."
     },
     {
@@ -97,14 +92,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web, iOS, Android",
       "inLanguage": "fr-FR",
-      "description": "Plateforme agréée et certifiée DGFiP pour la facturation électronique, la gestion de trésorerie et le pilotage d'activité, en lien avec votre cabinet d'expertise comptable.",
+      "description": "Plateforme agréée de facturation électronique, de gestion de trésorerie et de pilotage d'activité, en lien avec votre cabinet d'expertise comptable.",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "EUR",
-        "description": "Offre Basic gratuite, puis offres payantes à partir de 29 € HT / mois."
+        "description": "Offre Basic offerte, puis offres payantes à partir de 29 € HT / mois."
       },
-      "publisher": { "@id": "https://yannisg-cloud.github.io/cense/#organization" }
+      "publisher": { "@id": "https://cense.fr/#organization" }
     }
   ]
 }
@@ -595,10 +590,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 
 <body>
-<!-- Google Tag Manager (noscript) : remplacer GTM-KMTMVQDX -->
+<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMTMVQDX"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- Fin Google Tag Manager (noscript) -->
 
 <!-- ============== HEADER ============== -->
 <header class="site" id="hdr">
@@ -725,7 +719,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="vtext reveal">
       <span class="eyebrow"><span class="dot"></span>Conformité</span>
       <h2>Soyez conforme et sécurisez vos données.</h2>
-      <p class="ld">Dès septembre 2026, la facturation électronique devient obligatoire pour toutes les entreprises. CENSE héberge une plateforme agréée et certifiée DGFiP qui vous permet d'anticiper cette transition et d'intégrer ces nouvelles obligations en toute sérénité.</p>
+      <p class="ld">Dès septembre 2026, la facturation électronique devient obligatoire pour toutes les entreprises. CENSE héberge une plateforme agréée qui vous permet d'anticiper cette transition et d'intégrer ces nouvelles obligations en toute sérénité.</p>
       <ul class="checks">
         <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Recevez et émettez vos factures électroniques.</li>
         <li><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Vos documents conservés dans un coffre-fort à valeur probante.</li>
@@ -1227,7 +1221,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Formulaire de contact : à connecter à Brevo / HubSpot par l'équipe (Fanny).
   const cf=document.getElementById('contactForm');
   if(cf){cf.addEventListener('submit',function(e){
     e.preventDefault();
@@ -1247,13 +1240,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModals();});
 </script>
 
-<!-- Tally.so : chargement et redimensionnement automatique du formulaire intégré -->
+<!-- Tally embed -->
 <script>
   var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc;});};
   if("undefined"!=typeof Tally){v();}else if(null==d.querySelector('script[src="'+w+'"]')){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}
 </script>
 
-<!-- ============== BANDEAU COOKIES (relie au Consent Mode v2 / GTM) ============== -->
+<!-- Cookie banner -->
 <style>
   .cookie-banner{
     position:fixed;left:0;right:0;bottom:0;z-index:1000;
