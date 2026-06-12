@@ -3,6 +3,46 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ============================================================
+     CONSENT MODE v2 - valeurs par defaut (AVANT tout chargement)
+     Tout est refuse tant que le visiteur n'a pas donne son accord.
+     ============================================================ -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+  // Reprend le choix deja enregistre (visiteur de retour)
+  (function(){
+    try {
+      if (localStorage.getItem('cookie-consent') === 'accepted') {
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted',
+          'analytics_storage': 'granted'
+        });
+      }
+    } catch(e){}
+  })();
+</script>
+
+<!-- Google Tag Manager : remplacer GTM-KMTMVQDX par l'ID reel du conteneur -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KMTMVQDX');</script>
+<!-- Fin Google Tag Manager -->
+
 <title>CENSE — Plateforme agréée de facturation électronique & gestion</title>
 <meta name="description" content="CENSE est la plateforme agréée et certifiée DGFiP qui centralise votre gestion : facturation électronique, trésorerie et pilotage, en lien direct avec votre expert-comptable." />
 <meta name="keywords" content="facturation électronique, plateforme agréée DGFiP, e-invoicing, expert-comptable, gestion d'entreprise, trésorerie, pilotage d'activité, coffre-fort à valeur probante, devis et factures, réforme facturation 2026" />
@@ -555,6 +595,10 @@
 </head>
 
 <body>
+<!-- Google Tag Manager (noscript) : remplacer GTM-KMTMVQDX -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMTMVQDX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- Fin Google Tag Manager (noscript) -->
 
 <!-- ============== HEADER ============== -->
 <header class="site" id="hdr">
@@ -1207,6 +1251,66 @@
 <script>
   var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc;});};
   if("undefined"!=typeof Tally){v();}else if(null==d.querySelector('script[src="'+w+'"]')){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}
+</script>
+
+<!-- ============== BANDEAU COOKIES (relie au Consent Mode v2 / GTM) ============== -->
+<style>
+  .cookie-banner{
+    position:fixed;left:0;right:0;bottom:0;z-index:1000;
+    display:none;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    padding:18px 26px;
+    background:var(--c-prune);color:var(--c-creme);
+    box-shadow:0 -8px 30px -12px rgba(0,0,0,.5);
+    font-family:var(--f-corps);font-size:.92rem;line-height:1.45;
+  }
+  .cookie-banner.active{display:flex}
+  .cookie-banner p{margin:0;max-width:760px}
+  .cookie-banner a{color:var(--c-vert);text-decoration:underline;cursor:pointer}
+  .cookie-buttons{display:flex;gap:10px;flex-shrink:0}
+  .cookie-buttons button{
+    padding:11px 22px;border-radius:999px;font-weight:600;font-size:.9rem;
+    transition:transform .2s ease,opacity .2s ease;
+  }
+  .cookie-buttons button:hover{transform:translateY(-1px)}
+  .ck-accept{background:var(--c-vert);color:var(--c-prune)}
+  .ck-refuse{background:transparent;color:var(--c-creme);border:1px solid rgba(255,255,255,.4)}
+  @media(max-width:640px){
+    .cookie-banner{flex-direction:column;align-items:flex-start;padding:16px 20px}
+    .cookie-buttons{width:100%}
+    .cookie-buttons button{flex:1}
+  }
+</style>
+
+<div class="cookie-banner" id="cookie-banner">
+  <p>Ce site utilise des cookies de mesure d'audience et de suivi publicitaire. Vous pouvez les accepter ou les refuser. <a data-modal="modal-confidentialite">En savoir plus</a></p>
+  <div class="cookie-buttons">
+    <button type="button" class="ck-accept" onclick="cookieConsent('accepted')">Accepter</button>
+    <button type="button" class="ck-refuse" onclick="cookieConsent('refused')">Refuser</button>
+  </div>
+</div>
+
+<script>
+  function cookieConsent(choice){
+    try{
+      localStorage.setItem('cookie-consent', choice);
+      localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    }catch(e){}
+    document.getElementById('cookie-banner').classList.remove('active');
+    if(choice === 'accepted'){
+      gtag('consent', 'update', {
+        'ad_storage':'granted',
+        'ad_user_data':'granted',
+        'ad_personalization':'granted',
+        'analytics_storage':'granted'
+      });
+    }
+    if(window.dataLayer){window.dataLayer.push({event:'cookie_consent_'+choice});}
+  }
+  (function(){
+    var c;
+    try{c = localStorage.getItem('cookie-consent');}catch(e){}
+    if(!c){document.getElementById('cookie-banner').classList.add('active');}
+  })();
 </script>
 
 </body>
