@@ -31,6 +31,17 @@
   })();
 </script>
 
+<!-- HubSpot : suivi desactive par defaut, reactive si le visiteur accepte les cookies.
+     Le formulaire, lui, reste affiche et fonctionnel dans tous les cas. -->
+<script>
+  window._hsq = window._hsq || [];
+  (function(){
+    var c = null;
+    try { c = localStorage.getItem('cookie-consent'); } catch(e){}
+    if (c !== 'accepted') { window._hsq.push(['doNotTrack']); }
+  })();
+</script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -501,8 +512,99 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .contact-grid{display:grid;grid-template-columns:0.68fr 1.32fr;gap:48px;align-items:center}
   @media(max-width:920px){.contact-grid{grid-template-columns:1fr;gap:40px}}
   .contact-card{background:var(--c-blanc);border:1px solid var(--c-bordure);border-radius:var(--r-lg);padding:32px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:16px}
-  .tally-card{padding:20px 22px}
-  .tally-card iframe{display:block;width:100%;border:0;min-height:360px}
+  /* ===== Carte formulaire HubSpot ===== */
+  .hsform-card{padding:28px 28px 24px}
+  .hsform-loader{font-size:.9rem;color:var(--c-prune-80);text-align:center;padding:46px 0}
+  .hsform-fallback{text-align:center;padding:22px 4px}
+  .hsform-fallback p{color:var(--c-prune-80);font-size:.95rem;line-height:1.55;margin-bottom:20px}
+  .hsform-fallback-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .hsform-fallback-actions .btn{padding:12px 20px;font-size:.88rem}
+
+  /* ===== Formulaire HubSpot habille a la charte CENSE =====
+     La feuille de style HubSpot est desactivee (option css:'' dans
+     hbspt.forms.create). Tout le rendu ci-dessous est maitrise ici. */
+  .cense-hsform .hs-form{font-family:var(--f-corps);font-size:.95rem;color:var(--c-prune)}
+  .cense-hsform fieldset{border:0;padding:0;margin:0;max-width:none;width:100%}
+  .cense-hsform fieldset.form-columns-2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .cense-hsform fieldset.form-columns-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 14px}
+  @media(max-width:560px){
+    .cense-hsform fieldset.form-columns-2,
+    .cense-hsform fieldset.form-columns-3{grid-template-columns:1fr}
+  }
+  .cense-hsform .hs-form-field{margin:0 0 16px;width:auto !important;float:none !important}
+  .cense-hsform .hs-form-field > label{display:block;font-size:.82rem;font-weight:600;
+    color:var(--c-prune);margin-bottom:7px;line-height:1.3}
+  .cense-hsform .hs-form-required{color:#c2185b;margin-left:3px}
+  .cense-hsform .hs-field-desc{display:block;font-size:.78rem;color:var(--c-prune-80);
+    margin:-2px 0 8px;line-height:1.45}
+  .cense-hsform .input{margin:0 !important}
+
+  .cense-hsform .hs-input[type=text],
+  .cense-hsform .hs-input[type=email],
+  .cense-hsform .hs-input[type=tel],
+  .cense-hsform .hs-input[type=number],
+  .cense-hsform textarea.hs-input,
+  .cense-hsform select.hs-input{
+    font:inherit;color:var(--c-prune);background:var(--c-creme);
+    border:1.5px solid var(--c-bordure);border-radius:12px;
+    padding:12px 14px;width:100%;
+    transition:border-color .2s,background .2s;
+  }
+  .cense-hsform textarea.hs-input{min-height:104px;resize:vertical;display:block}
+  .cense-hsform .hs-input::placeholder{color:rgba(48,13,53,.4)}
+  .cense-hsform .hs-input:focus{outline:none;border-color:var(--c-rose);background:#fff}
+  .cense-hsform .hs-input.error,
+  .cense-hsform .hs-input.invalid{border-color:#c2185b;background:#fff}
+
+  /* Boutons radio et cases a cocher */
+  .cense-hsform ul.inputs-list{list-style:none;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:9px}
+  .cense-hsform ul.inputs-list li{margin:0}
+  .cense-hsform .hs-form-radio label,
+  .cense-hsform .hs-form-checkbox label,
+  .cense-hsform .hs-form-booleancheckbox label{
+    display:flex;gap:10px;align-items:flex-start;margin:0;cursor:pointer;
+    font-size:.9rem;font-weight:400;color:var(--c-prune-80);line-height:1.45;
+  }
+  .cense-hsform .hs-form-radio input,
+  .cense-hsform .hs-form-checkbox input,
+  .cense-hsform .hs-form-booleancheckbox input{
+    width:17px;height:17px;margin:2px 0 0;flex-shrink:0;accent-color:var(--c-prune);
+  }
+
+  /* Mentions RGPD */
+  .cense-hsform .legal-consent-container{margin:0 0 18px}
+  .cense-hsform .legal-consent-container .hs-richtext,
+  .cense-hsform .legal-consent-container p{font-size:.78rem;color:var(--c-prune-80);
+    line-height:1.5;margin:0 0 10px}
+  .cense-hsform .legal-consent-container a{color:var(--c-prune);text-decoration:underline}
+
+  /* Messages d'erreur */
+  .cense-hsform .hs-error-msgs{list-style:none;margin:7px 0 0;padding:0}
+  .cense-hsform .hs-error-msg,
+  .cense-hsform .hs-error-msgs label{font-size:.78rem;font-weight:500;color:#c2185b}
+  .cense-hsform .hs_error_rollup{margin-bottom:12px}
+  .cense-hsform .hs_error_rollup ul{list-style:none;margin:0;padding:0}
+
+  /* Bouton d'envoi */
+  .cense-hsform .hs_submit{margin-top:4px}
+  .cense-hsform .hs_submit .actions{margin:0;padding:0}
+  .cense-hsform .hs-button{
+    display:block;width:100%;text-align:center;cursor:pointer;border:0;
+    background:var(--c-prune);color:var(--c-blanc);
+    font-family:var(--f-corps);font-weight:600;font-size:.96rem;letter-spacing:.01em;
+    padding:15px 30px;border-radius:999px;
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .cense-hsform .hs-button:hover{transform:translateY(-2px);
+    box-shadow:0 14px 32px -10px rgba(48,13,53,.5)}
+  .cense-hsform .hs-button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+
+  /* Message de confirmation apres envoi */
+  .cense-hsform .submitted-message{text-align:center;padding:30px 6px;
+    color:var(--c-prune-80);font-size:1rem;line-height:1.6}
+  .cense-hsform .submitted-message p{margin:0 0 8px}
+  .cense-hsform .submitted-message p:last-child{margin-bottom:0}
   .field{display:flex;flex-direction:column;gap:7px}
   .field label{font-size:.82rem;font-weight:600;color:var(--c-prune)}
   .field input,.field textarea{font:inherit;color:var(--c-prune);background:var(--c-creme);border:1.5px solid var(--c-bordure);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s;resize:vertical}
@@ -946,10 +1048,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
     <div class="reveal d1">
-      <div class="contact-card tally-card">
-        <iframe data-tally-src="https://tally.so/embed/81r9NY?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
-          loading="lazy" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0"
-          title="CENSE – Demander une démo"></iframe>
+      <div class="contact-card hsform-card">
+
+        <!-- Cible du formulaire HubSpot. Charge systematiquement, sans condition. -->
+        <div class="cense-hsform" id="cense-hs-form"></div>
+
+        <!-- Etat de chargement -->
+        <div class="hsform-loader" id="hsform-loader">Chargement du formulaire&hellip;</div>
+
+        <!-- Repli en cas d'echec de chargement uniquement -->
+        <div class="hsform-fallback" id="hsform-fallback" hidden>
+          <p>Le formulaire n'a pas pu se charger. Un bloqueur de publicit&eacute; ou une extension de votre navigateur en est peut-&ecirc;tre la cause.</p>
+          <div class="hsform-fallback-actions">
+            <a class="btn btn-primary"
+               href="https://share-eu1.hsforms.com/14H-n-vQzTs2E3t0hnZme5w2g97eh"
+               target="_blank" rel="noopener noreferrer">Ouvrir le formulaire dans un nouvel onglet</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1173,10 +1289,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="cmp-notes"><p>
       <sup>(1)</sup> Obligation de réception : septembre 2026. Obligation d'émission (TPE/PME) : septembre 2027.<br/>
-      <sup>(2)</sup> Ou 9&nbsp;€ / mois pour les BNC, LMNP, SCI et holdings.<br/>
+      <sup>(2)</sup> Ou 9&nbsp;€ / mois pour les BNC, LMNP (Code APE 5520Z ou 6820A), SCI et holdings (Code APE 6920Z, 6420Z, 6430Z, 6630Z ou 7010Z).<br/>
       <sup>(3)</sup> Offre soumise à la signature d'une lettre de mission distincte avec le cabinet.<br/>
       <sup>(4)</sup> Accès additionnel disponible pour toutes les offres payantes : 5&nbsp;€ HT / mois par accès.<br/>
-      <sup>(5)</sup> Liste des logiciels compatibles disponible sur demande.<br/>
+      <sup>(5)</sup> Interconnexion facilitée avec de nombreux logiciels de facturation du marché, selon votre environnement et les compatibilités techniques.<br/>
       Tarifs valables jusqu'au 31 décembre 2027.
     </p></div>
   </div>
@@ -1191,14 +1307,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <h3 class="mh">Éditeur</h3>
     <p>
-      SA COGEP<br/>
-      2658 route d'Orléans – BP 55<br/>
-      18230 Saint-Doulchard<br/>
-      RCS Bourges 400 833 596<br/>
-      Tél. 02 48 68 83 00<br/>
-      Email : <a href="mailto:cogep-communication@cogep.fr">cogep-communication@cogep.fr</a>
+      COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES<br/>
+      Société par actions simplifiée au capital de 125 000 euros<br/>
+      Siège social : 1er étage, 4 place Sadi Carnot, 13002 Marseille<br/>
+      384 989 208 RCS Marseille
     </p>
-    <p>Directeur de la publication : Vincent VAUTIER</p>
+    <!-- À compléter pour le nouvel éditeur (requis par la LCEN, art. 6) : téléphone, email de contact et directeur de la publication. -->
 
     <h3 class="mh">Hébergement</h3>
     <p>
@@ -1228,10 +1342,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <h3 class="mh">Responsable du traitement</h3>
     <p>
-      SA COGEP<br/>
-      2658 route d'Orléans – BP 55<br/>
-      18230 Saint-Doulchard<br/>
-      Email : <a href="mailto:cogep-communication@cogep.fr">cogep-communication@cogep.fr</a>
+      COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES<br/>
+      4 place Sadi Carnot<br/>
+      13002 Marseille<br/>
+      Email : à préciser
     </p>
 
     <h3 class="mh">Données collectées</h3>
@@ -1259,13 +1373,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Les données sont conservées pour une durée maximale de 13 mois.</p>
 
     <h3 class="mh">Destinataires</h3>
-    <p>Les données sont destinées à SA COGEP et peuvent être traitées par Google LLC en qualité de sous-traitant, y compris hors Union européenne avec garanties appropriées.</p>
+    <p>Les données sont destinées à la COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES et peuvent être traitées par Google LLC en qualité de sous-traitant, y compris hors Union européenne avec garanties appropriées.</p>
 
     <h3 class="mh">Vos droits</h3>
     <p>
       Conformément au RGPD, vous disposez des droits d'accès, de rectification, d'effacement, de limitation et d'opposition.<br/>
       Pour les exercer :<br/>
-      <a href="mailto:cogep-communication@cogep.fr">cogep-communication@cogep.fr</a><br/>
+      Email : à préciser<br/>
       Vous pouvez également saisir la CNIL.
     </p>
   </div>
@@ -1320,10 +1434,83 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModals();});
 </script>
 
-<!-- Tally embed -->
+<!-- ===== Formulaire HubSpot ===== -->
 <script>
-  var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc;});};
-  if("undefined"!=typeof Tally){v();}else if(null==d.querySelector('script[src="'+w+'"]')){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}
+(function(){
+  /* Portail COGEP - CENSE (region eu1) - formulaire "CENSE.FR - Demande de demo".
+     Le formulaire est charge systematiquement : la collecte des donnees saisies
+     volontairement par le visiteur ne requiert pas de consentement prealable.
+     C'est le suivi analytique qui est conditionne, via _hsq doNotTrack (voir <head>). */
+  var HS_REGION  = 'eu1';
+  var HS_PORTAL  = '148235705';
+  var HS_FORM_ID = 'e07fa7fa-f433-4ecd-84de-dd219d999ee7';
+
+  var target   = document.getElementById('cense-hs-form');
+  var loader   = document.getElementById('hsform-loader');
+  var fallback = document.getElementById('hsform-fallback');
+  var loaded   = false;
+
+  function showFallback(){
+    if(target)   target.hidden   = true;
+    if(loader)   loader.hidden   = true;
+    if(fallback) fallback.hidden = false;
+  }
+
+  function buildForm(){
+    if(typeof hbspt === 'undefined' || !hbspt.forms){ showFallback(); return; }
+    hbspt.forms.create({
+      region:  HS_REGION,
+      portalId: HS_PORTAL,
+      formId:  HS_FORM_ID,
+      target:  '#cense-hs-form',
+      /* css:'' desactive la feuille de style HubSpot : le formulaire herite
+         entierement de l'habillage CENSE defini dans .cense-hsform.
+         Pour revenir au rendu HubSpot par defaut, supprimer cette ligne. */
+      css: '',
+      onFormReady: function(){
+        if(loader) loader.hidden = true;
+      },
+      onFormSubmitted: function(){
+        if(window.dataLayer){
+          window.dataLayer.push({ event:'cense_form_submit', form_name:'demande_demo' });
+        }
+      }
+    });
+  }
+
+  function loadHubSpotForm(){
+    if(loaded || !target) return;
+    loaded = true;
+    if(fallback) fallback.hidden = true;
+    if(loader)   loader.hidden   = false;
+    target.hidden = false;
+
+    if(typeof hbspt !== 'undefined' && hbspt.forms){ buildForm(); return; }
+
+    var s = document.createElement('script');
+    s.src     = 'https://js-' + HS_REGION + '.hsforms.net/forms/embed/v2.js';
+    s.charset = 'utf-8';
+    s.defer   = true;
+    s.onload  = buildForm;
+    s.onerror = function(){ loaded = false; showFallback(); };
+    document.body.appendChild(s);
+
+    /* Filet de securite : si le formulaire n'est pas rendu au bout de 8 s
+       (blocage reseau, bloqueur de pub), on repropose le lien direct. */
+    setTimeout(function(){
+      if(target && !target.querySelector('form') && !target.querySelector('.submitted-message')){
+        showFallback();
+      }
+    }, 8000);
+  }
+
+  /* Chargement immediat, sans condition */
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', loadHubSpotForm);
+  } else {
+    loadHubSpotForm();
+  }
+})();
 </script>
 
 <!-- Cookie banner -->
@@ -1376,6 +1563,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         'ad_personalization':'granted',
         'analytics_storage':'granted'
       });
+      /* Reactive le suivi HubSpot (le formulaire, lui, est deja affiche) */
+      window._hsq = window._hsq || [];
+      window._hsq.push(['doNotTrack', { track: true }]);
+    }
+    if(choice === 'refused'){
+      window._hsq = window._hsq || [];
+      window._hsq.push(['doNotTrack']);
     }
     if(window.dataLayer){window.dataLayer.push({event:'cookie_consent_'+choice});}
   }
