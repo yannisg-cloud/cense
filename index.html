@@ -521,19 +521,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hsform-fallback-actions .btn{padding:12px 20px;font-size:.88rem}
 
   /* ===== Formulaire HubSpot habille a la charte CENSE =====
-     La feuille de style HubSpot est desactivee (option css:'' dans
-     hbspt.forms.create). Tout le rendu ci-dessous est maitrise ici. */
+     La feuille de style par defaut de HubSpot est chargee (l'option css:''
+     empeche le rendu du formulaire). Les regles ci-dessous la surchargent :
+     le !important est necessaire face aux styles HubSpot et aux styles
+     inline que son script pose sur certains elements. */
   .cense-hsform .hs-form{font-family:var(--f-corps);font-size:.95rem;color:var(--c-prune)}
-  .cense-hsform fieldset{border:0;padding:0;margin:0;max-width:none;width:100%}
+
+  .cense-hsform fieldset{border:0;padding:0;margin:0;
+    max-width:none !important;width:100% !important}
   .cense-hsform fieldset.form-columns-2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
   .cense-hsform fieldset.form-columns-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 14px}
   @media(max-width:560px){
     .cense-hsform fieldset.form-columns-2,
     .cense-hsform fieldset.form-columns-3{grid-template-columns:1fr}
   }
-  .cense-hsform .hs-form-field{margin:0 0 16px;width:auto !important;float:none !important}
-  .cense-hsform .hs-form-field > label{display:block;font-size:.82rem;font-weight:600;
-    color:var(--c-prune);margin-bottom:7px;line-height:1.3}
+
+  .cense-hsform .hs-form-field{margin:0 0 16px !important;width:auto !important;float:none !important}
+  .cense-hsform .hs-form-field > label{display:block;font-size:.82rem !important;font-weight:600 !important;
+    color:var(--c-prune) !important;margin-bottom:7px;line-height:1.3}
   .cense-hsform .hs-form-required{color:#c2185b;margin-left:3px}
   .cense-hsform .hs-field-desc{display:block;font-size:.78rem;color:var(--c-prune-80);
     margin:-2px 0 8px;line-height:1.45}
@@ -545,60 +550,73 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .cense-hsform .hs-input[type=number],
   .cense-hsform textarea.hs-input,
   .cense-hsform select.hs-input{
-    font:inherit;color:var(--c-prune);background:var(--c-creme);
-    border:1.5px solid var(--c-bordure);border-radius:12px;
-    padding:12px 14px;width:100%;
+    font:inherit !important;color:var(--c-prune) !important;
+    background:var(--c-creme) !important;
+    border:1.5px solid var(--c-bordure) !important;
+    border-radius:12px !important;
+    padding:12px 14px !important;
+    width:100% !important;max-width:none !important;height:auto !important;
+    box-shadow:none !important;
     transition:border-color .2s,background .2s;
   }
-  .cense-hsform textarea.hs-input{min-height:104px;resize:vertical;display:block}
+  .cense-hsform textarea.hs-input{min-height:104px !important;resize:vertical;display:block}
   .cense-hsform .hs-input::placeholder{color:rgba(48,13,53,.4)}
-  .cense-hsform .hs-input:focus{outline:none;border-color:var(--c-rose);background:#fff}
+  .cense-hsform .hs-input:focus{outline:none !important;
+    border-color:var(--c-rose) !important;background:#fff !important}
   .cense-hsform .hs-input.error,
-  .cense-hsform .hs-input.invalid{border-color:#c2185b;background:#fff}
+  .cense-hsform .hs-input.invalid{border-color:#c2185b !important;background:#fff !important}
 
   /* Boutons radio et cases a cocher */
-  .cense-hsform ul.inputs-list{list-style:none;margin:0;padding:0;
+  .cense-hsform ul.inputs-list{list-style:none !important;margin:0 !important;padding:0 !important;
     display:flex;flex-direction:column;gap:9px}
-  .cense-hsform ul.inputs-list li{margin:0}
+  .cense-hsform ul.inputs-list li{margin:0 !important;padding:0}
   .cense-hsform .hs-form-radio label,
   .cense-hsform .hs-form-checkbox label,
   .cense-hsform .hs-form-booleancheckbox label{
-    display:flex;gap:10px;align-items:flex-start;margin:0;cursor:pointer;
-    font-size:.9rem;font-weight:400;color:var(--c-prune-80);line-height:1.45;
+    display:flex !important;gap:10px;align-items:flex-start;margin:0 !important;cursor:pointer;
+    font-size:.9rem !important;font-weight:400 !important;color:var(--c-prune-80) !important;
+    line-height:1.45;
   }
   .cense-hsform .hs-form-radio input,
   .cense-hsform .hs-form-checkbox input,
   .cense-hsform .hs-form-booleancheckbox input{
-    width:17px;height:17px;margin:2px 0 0;flex-shrink:0;accent-color:var(--c-prune);
+    width:17px !important;height:17px !important;margin:2px 0 0 !important;
+    flex-shrink:0;accent-color:var(--c-prune);
   }
 
   /* Mentions RGPD */
   .cense-hsform .legal-consent-container{margin:0 0 18px}
   .cense-hsform .legal-consent-container .hs-richtext,
-  .cense-hsform .legal-consent-container p{font-size:.78rem;color:var(--c-prune-80);
-    line-height:1.5;margin:0 0 10px}
+  .cense-hsform .legal-consent-container p{font-size:.78rem !important;
+    color:var(--c-prune-80) !important;line-height:1.5;margin:0 0 10px}
   .cense-hsform .legal-consent-container a{color:var(--c-prune);text-decoration:underline}
 
   /* Messages d'erreur */
-  .cense-hsform .hs-error-msgs{list-style:none;margin:7px 0 0;padding:0}
+  .cense-hsform .hs-error-msgs{list-style:none !important;margin:7px 0 0 !important;padding:0 !important}
   .cense-hsform .hs-error-msg,
-  .cense-hsform .hs-error-msgs label{font-size:.78rem;font-weight:500;color:#c2185b}
+  .cense-hsform .hs-error-msgs label{font-size:.78rem !important;font-weight:500 !important;
+    color:#c2185b !important}
   .cense-hsform .hs_error_rollup{margin-bottom:12px}
   .cense-hsform .hs_error_rollup ul{list-style:none;margin:0;padding:0}
 
   /* Bouton d'envoi */
   .cense-hsform .hs_submit{margin-top:4px}
-  .cense-hsform .hs_submit .actions{margin:0;padding:0}
-  .cense-hsform .hs-button{
-    display:block;width:100%;text-align:center;cursor:pointer;border:0;
-    background:var(--c-prune);color:var(--c-blanc);
-    font-family:var(--f-corps);font-weight:600;font-size:.96rem;letter-spacing:.01em;
-    padding:15px 30px;border-radius:999px;
+  .cense-hsform .hs_submit .actions{margin:0 !important;padding:0 !important}
+  .cense-hsform .hs-button,
+  .cense-hsform input[type=submit].hs-button{
+    display:block !important;width:100% !important;text-align:center;cursor:pointer;
+    border:0 !important;
+    background:var(--c-prune) !important;background-image:none !important;
+    color:var(--c-blanc) !important;
+    font-family:var(--f-corps) !important;font-weight:600 !important;
+    font-size:.96rem !important;letter-spacing:.01em;line-height:1.2 !important;
+    padding:15px 30px !important;border-radius:999px !important;
+    text-shadow:none !important;box-shadow:none !important;
     transition:transform .25s ease,box-shadow .25s ease;
   }
   .cense-hsform .hs-button:hover{transform:translateY(-2px);
-    box-shadow:0 14px 32px -10px rgba(48,13,53,.5)}
-  .cense-hsform .hs-button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+    box-shadow:0 14px 32px -10px rgba(48,13,53,.5) !important}
+  .cense-hsform .hs-button:disabled{opacity:.55;cursor:not-allowed;transform:none}
 
   /* Message de confirmation apres envoi */
   .cense-hsform .submitted-message{text-align:center;padding:30px 6px;
@@ -1463,10 +1481,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       portalId: HS_PORTAL,
       formId:  HS_FORM_ID,
       target:  '#cense-hs-form',
-      /* css:'' desactive la feuille de style HubSpot : le formulaire herite
-         entierement de l'habillage CENSE defini dans .cense-hsform.
-         Pour revenir au rendu HubSpot par defaut, supprimer cette ligne. */
-      css: '',
+      /* NE PAS ajouter css:'' ici : HubSpot ne rend plus le formulaire du tout.
+         La feuille de style HubSpot est donc chargee, et l'habillage CENSE
+         la surcharge via les regles .cense-hsform (voir le <style> en tete). */
       onFormReady: function(){
         if(loader) loader.hidden = true;
       },
