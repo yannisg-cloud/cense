@@ -623,6 +623,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color:var(--c-prune-80);font-size:1rem;line-height:1.6}
   .cense-hsform .submitted-message p{margin:0 0 8px}
   .cense-hsform .submitted-message p:last-child{margin-bottom:0}
+
+  /* Cas ou HubSpot rend le formulaire dans un iframe : l'habillage CENSE
+     ci-dessus ne peut pas l'atteindre (document isole). On se contente
+     alors de garantir la largeur et l'absence de bordure. */
+  .cense-hsform iframe{display:block;width:100% !important;border:0 !important}
   .field{display:flex;flex-direction:column;gap:7px}
   .field label{font-size:.82rem;font-weight:600;color:var(--c-prune)}
   .field input,.field textarea{font:inherit;color:var(--c-prune);background:var(--c-creme);border:1.5px solid var(--c-bordure);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s;resize:vertical}
@@ -1467,6 +1472,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   var loader   = document.getElementById('hsform-loader');
   var fallback = document.getElementById('hsform-fallback');
   var loaded   = false;
+  var ready    = false;   /* passe a true des que HubSpot signale le rendu */
 
   function showFallback(){
     if(target)   target.hidden   = true;
@@ -1485,7 +1491,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          La feuille de style HubSpot est donc chargee, et l'habillage CENSE
          la surcharge via les regles .cense-hsform (voir le <style> en tete). */
       onFormReady: function(){
-        if(loader) loader.hidden = true;
+        ready = true;
+        if(loader)   loader.hidden   = true;
+        if(fallback) fallback.hidden = true;
+        if(target)   target.hidden   = false;
       },
       onFormSubmitted: function(){
         if(window.dataLayer){
@@ -1502,23 +1511,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(loader)   loader.hidden   = false;
     target.hidden = false;
 
-    if(typeof hbspt !== 'undefined' && hbspt.forms){ buildForm(); return; }
+    if(typeof hbspt !== 'undefined' && hbspt.forms){
+      buildForm();
+    } else {
+      var s = document.createElement('script');
+      s.src     = 'https://js-' + HS_REGION + '.hsforms.net/forms/embed/v2.js';
+      s.charset = 'utf-8';
+      s.defer   = true;
+      s.onload  = buildForm;
+      s.onerror = function(){ loaded = false; showFallback(); };
+      document.body.appendChild(s);
+    }
 
-    var s = document.createElement('script');
-    s.src     = 'https://js-' + HS_REGION + '.hsforms.net/forms/embed/v2.js';
-    s.charset = 'utf-8';
-    s.defer   = true;
-    s.onload  = buildForm;
-    s.onerror = function(){ loaded = false; showFallback(); };
-    document.body.appendChild(s);
-
-    /* Filet de securite : si le formulaire n'est pas rendu au bout de 8 s
-       (blocage reseau, bloqueur de pub), on repropose le lien direct. */
+    /* Filet de securite : on ne bascule sur le repli que si HubSpot n'a
+       PAS signale le rendu (onFormReady) ET que rien n'a ete injecte dans
+       la cible. Le test porte aussi sur iframe : selon la configuration,
+       HubSpot rend le formulaire dans un iframe et non en HTML inline —
+       chercher uniquement <form> faisait passer un rendu valide pour un echec. */
     setTimeout(function(){
-      if(target && !target.querySelector('form') && !target.querySelector('.submitted-message')){
-        showFallback();
-      }
-    }, 8000);
+      if(ready || !target) return;
+      var rendu = target.querySelector('form')
+               || target.querySelector('iframe')
+               || target.querySelector('.submitted-message')
+               || target.querySelector('.hbspt-form');
+      if(!rendu){ showFallback(); }
+    }, 12000);
   }
 
   /* Chargement immediat, sans condition */
