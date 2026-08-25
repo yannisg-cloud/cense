@@ -668,29 +668,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* ===== Vue Offres & fonctionnalites (route /offres-fonctionnalites) ===== */
   #view-home[hidden],#view-offres[hidden]{display:none}
+  /* Bandeau d'entete sombre : signale sans ambiguite un changement de page. */
   .page-head{
-    position:relative;overflow:hidden;padding:150px 0 54px;transition:padding-top .4s ease;
+    position:relative;overflow:hidden;padding:150px 0 66px;transition:padding-top .4s ease;
+    color:var(--c-blanc);
     background:
-      radial-gradient(80% 90% at 85% 0%, rgba(237,152,244,.30) 0%, transparent 58%),
-      radial-gradient(70% 80% at 0% 100%, rgba(218,255,125,.30) 0%, transparent 58%),
-      var(--c-creme);
+      radial-gradient(85% 120% at 88% -10%, rgba(237,152,244,.34) 0%, transparent 60%),
+      radial-gradient(60% 90% at -5% 115%, rgba(218,255,125,.18) 0%, transparent 60%),
+      var(--c-prune);
   }
   body.has-annc .page-head{padding-top:calc(150px + var(--annc-h))}
   @media(max-width:960px){
-    .page-head{padding:130px 0 44px}
+    .page-head{padding:130px 0 54px}
     body.has-annc .page-head{padding-top:calc(130px + var(--annc-h))}
   }
   .breadcrumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
-    font-size:.8rem;font-weight:500;color:var(--c-prune-80);margin-bottom:22px}
-  .breadcrumb a:hover{color:var(--c-prune);text-decoration:underline}
+    font-size:.82rem;font-weight:500;color:rgba(255,255,255,.62);margin-bottom:26px}
+  .breadcrumb a{border-bottom:1px solid rgba(255,255,255,.28);transition:color .2s,border-color .2s}
+  .breadcrumb a:hover{color:var(--c-vert);border-color:var(--c-vert)}
   .breadcrumb .sep{opacity:.45}
-  .breadcrumb [aria-current]{font-weight:600;color:var(--c-prune)}
-  .page-head h1{margin:14px 0 20px;font-size:clamp(2rem,4.6vw,3.5rem)}
-  .page-head .lead{max-width:640px;font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--c-prune-80)}
-  .page-cond{max-width:640px;margin-top:16px;font-size:.86rem;color:var(--c-prune-80)}
+  .breadcrumb [aria-current]{font-weight:600;color:var(--c-blanc)}
+  .page-head h1{margin:14px 0 22px;font-size:clamp(2rem,4.6vw,3.5rem)}
+  .page-head h1 .accent{color:var(--c-vert)}
+  .page-head .lead{max-width:660px;font-size:clamp(1.05rem,1.5vw,1.22rem);color:rgba(255,255,255,.78)}
+
+  /* Le logo et le bouton de connexion restent lisibles sur le bandeau sombre. */
+  body.route-offres header.site .logo g{fill:var(--c-blanc)}
+  body.route-offres header.site.scrolled .logo g{fill:var(--c-prune)}
+  body.route-offres header.site:not(.scrolled) .btn-login{background:var(--c-vert);color:var(--c-prune)}
+
+  /* Transition d'entree, pour que le changement de vue se percoive. */
+  @keyframes vueEntre{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .vue-entre{animation:vueEntre .45s cubic-bezier(.22,1,.36,1) both}
+  @media (prefers-reduced-motion:reduce){.vue-entre{animation:none}}
 
   .offres-table{padding:52px 0 20px}
   .offres-table .cmp-notes{margin-top:18px}
+  .cmp-cond{margin-top:16px;padding-top:14px;border-top:1px solid var(--c-bordure);
+    font-size:.82rem;color:var(--c-prune-80);line-height:1.6}
 
   .offres-cta{padding:20px 0 90px}
   .cta-card{
@@ -1091,10 +1106,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">Offres &amp; fonctionnalités</span>
       </nav>
-      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Comparatif des offres</span>
-      <h1>Offres &amp;<br/><span class="mark">fonctionnalités</span></h1>
+      <span class="eyebrow light"><span class="dot" aria-hidden="true"></span>Comparatif des offres</span>
+      <h1>Offres &amp;<br/><span class="accent">fonctionnalités</span></h1>
       <p class="lead">Comparez en détail les fonctionnalités incluses dans chaque offre CENSE, et choisissez la formule la plus adaptée, aux côtés de votre conseiller.</p>
-      <p class="page-cond">Offres réservées aux clients signataires d'une lettre de mission comptable auprès de l'un de nos cabinets comptables partenaires.</p>
     </div>
   </section>
 
@@ -1268,7 +1282,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <sup>(4)</sup> Accès additionnel disponible pour toutes les offres payantes : 5&nbsp;€ HT / mois par accès.<br/>
       <sup>(5)</sup> Interconnexion facilitée avec de nombreux logiciels de facturation du marché, selon votre environnement et les compatibilités techniques.<br/>
       Tarifs valables jusqu'au 31 décembre 2027.
-    </p></div>
+    </p>
+    <p class="cmp-cond">Offres réservées aux clients signataires d'une lettre de mission comptable auprès de l'un de nos cabinets comptables partenaires.</p>
+    </div>
     </div>
   </section>
 
@@ -1689,6 +1705,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }catch(e){}
 
     if(vue !== vueCourante){
+      /* Breve animation d'entree : le changement de page doit se voir. */
+      if(vueCourante !== null){
+        var cible2 = estOffres ? vOffres : vHome;
+        cible2.classList.remove('vue-entre');
+        void cible2.offsetWidth;
+        cible2.classList.add('vue-entre');
+      }
       vueCourante = vue;
       if(opts.suivi !== false) suivi(m, estOffres ? ROUTE : '/');
     }
