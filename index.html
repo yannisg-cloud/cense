@@ -581,17 +581,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .modal-card p + p{margin-top:10px}
   .modal-card a{color:var(--c-prune);text-decoration:underline}
 
-  /* ===== Tableau des offres (modale) ===== */
-  .modal-card.wide{max-width:1120px;padding:36px 36px 40px}
-  @media(max-width:560px){
-    /* On recupere de la largeur utile pour le tableau comparatif :
-       marges de la modale et de la carte reduites au minimum. */
-    .modal{padding:12px}
-    .modal-card.wide{padding:26px 14px 28px}
-    .modal-card.wide .cmp-shell{margin-left:-8px;margin-right:-8px}
-    .modal-card.wide .scroll-hint{margin-left:-4px}
-  }
-  .offres-modal-intro{color:var(--c-prune-80);font-size:.98rem;margin:6px 0 18px}
+  /* ===== Tableau comparatif des offres ===== */
   /* Indicateur de defilement */
   .scroll-hint{display:none;align-items:center;gap:8px;
     font-size:.78rem;font-weight:600;color:var(--c-prune);
@@ -676,6 +666,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     table.cmp tbody td:not([colspan]){min-width:94px}
   }
 
+  /* ===== Vue Offres & fonctionnalites (route /offres-fonctionnalites) ===== */
+  #view-home[hidden],#view-offres[hidden]{display:none}
+  .page-head{
+    position:relative;overflow:hidden;padding:150px 0 54px;transition:padding-top .4s ease;
+    background:
+      radial-gradient(80% 90% at 85% 0%, rgba(237,152,244,.30) 0%, transparent 58%),
+      radial-gradient(70% 80% at 0% 100%, rgba(218,255,125,.30) 0%, transparent 58%),
+      var(--c-creme);
+  }
+  body.has-annc .page-head{padding-top:calc(150px + var(--annc-h))}
+  @media(max-width:960px){
+    .page-head{padding:130px 0 44px}
+    body.has-annc .page-head{padding-top:calc(130px + var(--annc-h))}
+  }
+  .breadcrumb{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    font-size:.8rem;font-weight:500;color:var(--c-prune-80);margin-bottom:22px}
+  .breadcrumb a:hover{color:var(--c-prune);text-decoration:underline}
+  .breadcrumb .sep{opacity:.45}
+  .breadcrumb [aria-current]{font-weight:600;color:var(--c-prune)}
+  .page-head h1{margin:14px 0 20px;font-size:clamp(2rem,4.6vw,3.5rem)}
+  .page-head .lead{max-width:640px;font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--c-prune-80)}
+  .page-cond{max-width:640px;margin-top:16px;font-size:.86rem;color:var(--c-prune-80)}
+
+  .offres-table{padding:52px 0 20px}
+  .offres-table .cmp-notes{margin-top:18px}
+
+  .offres-cta{padding:20px 0 90px}
+  .cta-card{
+    background:var(--c-prune);color:var(--c-blanc);border-radius:var(--r-xl);
+    padding:52px 56px;box-shadow:var(--shadow);
+    display:flex;align-items:center;justify-content:space-between;gap:34px;flex-wrap:wrap;
+  }
+  .cta-card h2{font-size:clamp(1.6rem,2.8vw,2.3rem);max-width:620px}
+  .cta-card p{color:rgba(255,255,255,.75);margin-top:14px;max-width:620px;font-size:1rem}
+  .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .cta-card .btn-primary{background:var(--c-vert);color:var(--c-prune)}
+  .cta-card .btn-ghost{color:#fff}
+  .cta-card .btn-ghost:hover{background:#fff;color:var(--c-prune);border-color:#fff}
+  @media(max-width:760px){
+    .cta-card{padding:38px 26px;flex-direction:column;align-items:flex-start}
+    .offres-cta{padding-bottom:70px}
+  }
+
   /* ===== Banniere cookies ===== */
   .cookie-banner{
     position:fixed;left:0;right:0;bottom:0;z-index:1000;
@@ -728,7 +761,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ============== HEADER ============== -->
 <header class="site" id="hdr">
   <div class="container nav">
-    <a href="#top" class="brand" aria-label="CENSE - accueil">
+    <a href="/" class="brand" aria-label="CENSE - accueil">
       <svg class="logo" viewBox="0 0 763.81 237.79" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CENSE">
         <g fill="#300d35">
           <path d="M70.47,59.27h125.34c.98,0,1.77.79,1.77,1.77v50.8c0,.98-.79,1.77-1.77,1.77h-57.43c-.98,0-1.77.79-1.77,1.77v6.87c0,.98.79,1.77,1.77,1.77h57.43c.98,0,1.77.79,1.77,1.77v50.8c0,.98-.79,1.77-1.77,1.77h-125.66c-.98,0-1.77-.79-1.77-1.77l.32-115.53c0-.97.79-1.76,1.77-1.76Z"/>
@@ -749,6 +782,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <main id="top">
+
+<!-- ============== VUE : ACCUEIL ============== -->
+<div id="view-home">
 
 <!-- ============== HERO ============== -->
 <section class="hero">
@@ -1043,63 +1079,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-</main>
+</div><!-- /#view-home -->
 
-<!-- ============== FOOTER ============== -->
-<footer class="site">
-  <div class="container">
-    <div class="foot-grid">
-      <div>
-        <a href="#top" class="brand" aria-label="CENSE - accueil">
-          <svg class="logo" viewBox="0 0 763.81 237.79" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CENSE">
-            <g fill="#ffffff">
-              <path d="M70.47,59.27h125.34c.98,0,1.77.79,1.77,1.77v50.8c0,.98-.79,1.77-1.77,1.77h-57.43c-.98,0-1.77.79-1.77,1.77v6.87c0,.98.79,1.77,1.77,1.77h57.43c.98,0,1.77.79,1.77,1.77v50.8c0,.98-.79,1.77-1.77,1.77h-125.66c-.98,0-1.77-.79-1.77-1.77l.32-115.53c0-.97.79-1.76,1.77-1.76Z"/>
-              <path d="M259.15,102.74v6.87c0,.98.79,1.77,1.77,1.77h40.77c.98,0,1.77.79,1.77,1.77v11.5c0,.98-.79,1.77-1.77,1.77h-40.77c-.98,0-1.77.79-1.77,1.77v6.87c0,.98.79,1.77,1.77,1.77h42.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-96.32c-.98,0-1.77-.79-1.77-1.77V60.95c0-.98.79-1.77,1.77-1.77h96.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-42.32c-.98,0-1.77.79-1.77,1.77Z"/>
-              <path d="M649.57,102.74v6.87c0,.98.79,1.77,1.77,1.77h40.77c.98,0,1.77.79,1.77,1.77v11.5c0,.98-.79,1.77-1.77,1.77h-40.77c-.98,0-1.77.79-1.77,1.77v6.87c0,.98.79,1.77,1.77,1.77h42.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-96.32c-.98,0-1.77-.79-1.77-1.77V60.95c0-.98.79-1.77,1.77-1.77h96.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-42.32c-.98,0-1.77.79-1.77,1.77Z"/>
-              <path d="M383.89,176.94l-9.07-57.82c-.13-.86-.88-1.49-1.75-1.49h-1.66c-.98,0-1.77.79-1.77,1.77v57.28c0,.98-.79,1.77-1.77,1.77h-53.53c-.98,0-1.77-.79-1.77-1.77V60.96c0-.98.79-1.77,1.77-1.77h82.91c.87,0,1.61.63,1.75,1.49l9.07,57.82c.13.86.88,1.49,1.75,1.49h.64c.98,0,1.77-.79,1.77-1.77v-57.28c0-.98.79-1.77,1.77-1.77h53.53c.98,0,1.77.79,1.77,1.77v115.7c0,.98-.79,1.77-1.77,1.77h-81.89c-.87,0-1.61-.63-1.75-1.49Z"/>
-              <path d="M540.21,106.84h46.08c.98,0,1.77.79,1.77,1.77v68.06c0,.98-.79,1.77-1.77,1.77h-107.54c-.98,0-1.77-.79-1.77-1.77v-35.04c0-.98.8-1.77,1.77-1.77h44.13c.98,0,1.77-.79,1.77-1.77v-6.99c0-.98-.79-1.77-1.77-1.77h-44.14c-.98,0-1.77-.79-1.77-1.77V60.95c0-.98.79-1.77,1.77-1.77h107.54c.98,0,1.77.79,1.77,1.77v33.59c0,.98-.79,1.77-1.77,1.77h-46.08c-.98,0-1.77.79-1.77,1.77v6.98c0,.98.79,1.77,1.77,1.77Z"/>
-            </g>
-          </svg>
-        </a>
-        <p style="max-width:340px">L'outil de gestion idéal de l'entreprise de demain. Pensé par votre cabinet, pour votre activité.</p>
-      </div>
-      <div>
-        <h4>La plateforme</h4>
-        <ul>
-          <li><a href="#plateforme">Présentation</a></li>
-          <li><a href="#conformite">Conformité</a></li>
-          <li><a href="#tresorerie">Trésorerie</a></li>
-          <li><a href="#pilotage">Pilotage</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Découvrir</h4>
-        <ul>
-          <li><a href="#decouvrir">La vidéo</a></li>
-          <li><a href="#" data-modal="modal-offres">Offres &amp; fonctionnalités</a></li>
-          <li><a href="#contact">Nous contacter</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>© <span id="yr"></span> CENSE. Tous droits réservés.</span>
-      <span class="foot-legal">
-        <button type="button" class="lk" data-modal="modal-mentions">Mentions légales</button>
-        <button type="button" class="lk" data-modal="modal-confidentialite">Politique de confidentialité</button>
-      </span>
-      <span>Smart. Simple. Sensé(e). Donner du sens à l'essentiel.</span>
-    </div>
-  </div>
-</footer>
+<!-- ============== VUE : OFFRES & FONCTIONNALITÉS (route /offres-fonctionnalites) ============== -->
+<div id="view-offres" hidden>
 
-<!-- ============== MODALE OFFRES & FONCTIONNALITÉS ============== -->
-<div class="modal" id="modal-offres" hidden>
-  <div class="modal-backdrop" data-close></div>
-  <div class="modal-card wide" role="dialog" aria-modal="true" aria-labelledby="of-title">
-    <button class="modal-close" type="button" data-close aria-label="Fermer">✕</button>
-    <h2 id="of-title" class="modal-title">Offres &amp; fonctionnalités</h2>
-    <p class="offres-cond" style="font-size:.9rem;color:var(--c-prune-80);margin:6px 0 14px">Offres réservées aux clients signataires d'une lettre de mission comptable auprès de l'un de nos cabinets comptables partenaires.</p>
-    <p class="offres-modal-intro">Comparez en détail les fonctionnalités incluses dans chaque offre CENSE, et choisissez la formule la plus adaptée, aux côtés de votre conseiller.</p>
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d'ariane">
+        <a href="/">Accueil</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Offres &amp; fonctionnalités</span>
+      </nav>
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Comparatif des offres</span>
+      <h1>Offres &amp;<br/><span class="mark">fonctionnalités</span></h1>
+      <p class="lead">Comparez en détail les fonctionnalités incluses dans chaque offre CENSE, et choisissez la formule la plus adaptée, aux côtés de votre conseiller.</p>
+      <p class="page-cond">Offres réservées aux clients signataires d'une lettre de mission comptable auprès de l'un de nos cabinets comptables partenaires.</p>
+    </div>
+  </section>
+
+  <section class="offres-table" id="comparatif">
+    <div class="container">
     <p class="scroll-hint">Faites glisser le tableau <span class="sh-arrow" aria-hidden="true">→</span></p>
     <div class="cmp-shell" id="cmp-shell">
     <div class="cmp-wrap" id="cmp-wrap">
@@ -1269,8 +1269,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <sup>(5)</sup> Interconnexion facilitée avec de nombreux logiciels de facturation du marché, selon votre environnement et les compatibilités techniques.<br/>
       Tarifs valables jusqu'au 31 décembre 2027.
     </p></div>
+    </div>
+  </section>
+
+  <section class="offres-cta">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Quelle offre pour votre activité ?</h2>
+          <p>Votre expert-comptable connaît votre entreprise et vous accompagne dans le choix de la formule adaptée. Parlons-en.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="/#contact">Être recontacté<span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="/">Découvrir CENSE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#view-offres -->
+
+</main>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="/" class="brand" aria-label="CENSE - accueil">
+          <svg class="logo" viewBox="0 0 763.81 237.79" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CENSE">
+            <g fill="#ffffff">
+              <path d="M70.47,59.27h125.34c.98,0,1.77.79,1.77,1.77v50.8c0,.98-.79,1.77-1.77,1.77h-57.43c-.98,0-1.77.79-1.77,1.77v6.87c0,.98.79,1.77,1.77,1.77h57.43c.98,0,1.77.79,1.77,1.77v50.8c0,.98-.79,1.77-1.77,1.77h-125.66c-.98,0-1.77-.79-1.77-1.77l.32-115.53c0-.97.79-1.76,1.77-1.76Z"/>
+              <path d="M259.15,102.74v6.87c0,.98.79,1.77,1.77,1.77h40.77c.98,0,1.77.79,1.77,1.77v11.5c0,.98-.79,1.77-1.77,1.77h-40.77c-.98,0-1.77.79-1.77,1.77v6.87c0,.98.79,1.77,1.77,1.77h42.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-96.32c-.98,0-1.77-.79-1.77-1.77V60.95c0-.98.79-1.77,1.77-1.77h96.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-42.32c-.98,0-1.77.79-1.77,1.77Z"/>
+              <path d="M649.57,102.74v6.87c0,.98.79,1.77,1.77,1.77h40.77c.98,0,1.77.79,1.77,1.77v11.5c0,.98-.79,1.77-1.77,1.77h-40.77c-.98,0-1.77.79-1.77,1.77v6.87c0,.98.79,1.77,1.77,1.77h42.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-96.32c-.98,0-1.77-.79-1.77-1.77V60.95c0-.98.79-1.77,1.77-1.77h96.32c.98,0,1.77.79,1.77,1.77v38.25c0,.98-.79,1.77-1.77,1.77h-42.32c-.98,0-1.77.79-1.77,1.77Z"/>
+              <path d="M383.89,176.94l-9.07-57.82c-.13-.86-.88-1.49-1.75-1.49h-1.66c-.98,0-1.77.79-1.77,1.77v57.28c0,.98-.79,1.77-1.77,1.77h-53.53c-.98,0-1.77-.79-1.77-1.77V60.96c0-.98.79-1.77,1.77-1.77h82.91c.87,0,1.61.63,1.75,1.49l9.07,57.82c.13.86.88,1.49,1.75,1.49h.64c.98,0,1.77-.79,1.77-1.77v-57.28c0-.98.79-1.77,1.77-1.77h53.53c.98,0,1.77.79,1.77,1.77v115.7c0,.98-.79,1.77-1.77,1.77h-81.89c-.87,0-1.61-.63-1.75-1.49Z"/>
+              <path d="M540.21,106.84h46.08c.98,0,1.77.79,1.77,1.77v68.06c0,.98-.79,1.77-1.77,1.77h-107.54c-.98,0-1.77-.79-1.77-1.77v-35.04c0-.98.8-1.77,1.77-1.77h44.13c.98,0,1.77-.79,1.77-1.77v-6.99c0-.98-.79-1.77-1.77-1.77h-44.14c-.98,0-1.77-.79-1.77-1.77V60.95c0-.98.79-1.77,1.77-1.77h107.54c.98,0,1.77.79,1.77,1.77v33.59c0,.98-.79,1.77-1.77,1.77h-46.08c-.98,0-1.77.79-1.77,1.77v6.98c0,.98.79,1.77,1.77,1.77Z"/>
+            </g>
+          </svg>
+        </a>
+        <p style="max-width:340px">L'outil de gestion idéal de l'entreprise de demain. Pensé par votre cabinet, pour votre activité.</p>
+      </div>
+      <div>
+        <h4>La plateforme</h4>
+        <ul>
+          <li><a href="#plateforme">Présentation</a></li>
+          <li><a href="#conformite">Conformité</a></li>
+          <li><a href="#tresorerie">Trésorerie</a></li>
+          <li><a href="#pilotage">Pilotage</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Découvrir</h4>
+        <ul>
+          <li><a href="#decouvrir">La vidéo</a></li>
+          <li><a href="/offres-fonctionnalites" id="lien-offres">Offres &amp; fonctionnalités</a></li>
+          <li><a href="#contact">Nous contacter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> CENSE. Tous droits réservés.</span>
+      <span class="foot-legal">
+        <button type="button" class="lk" data-modal="modal-mentions">Mentions légales</button>
+        <button type="button" class="lk" data-modal="modal-confidentialite">Politique de confidentialité</button>
+      </span>
+      <span>Smart. Simple. Sensé(e). Donner du sens à l'essentiel.</span>
+    </div>
   </div>
-</div>
+</footer>
 
 <!-- ============== MODALE MENTIONS LÉGALES ============== -->
 <div class="modal" id="modal-mentions" hidden>
@@ -1510,6 +1576,177 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.addEventListener('DOMContentLoaded', loadHubSpotForm);
   } else {
     loadHubSpotForm();
+  }
+})();
+</script>
+
+
+<!-- ===== Routeur : /offres-fonctionnalites servi par ce meme fichier ===== -->
+<script>
+(function(){
+  var ROUTE = '/offres-fonctionnalites';
+  var vHome   = document.getElementById('view-home');
+  var vOffres = document.getElementById('view-offres');
+  if(!vHome || !vOffres) return;
+
+  /* Metadonnees de chaque vue. Celles de l'accueil sont lues dans le <head>. */
+  function attr(sel, a){ var el=document.querySelector(sel); return el ? el.getAttribute(a) : ''; }
+  var META = {
+    home: {
+      url:   'https://cense.fr/',
+      title: document.title,
+      desc:  attr('meta[name="description"]','content')
+    },
+    offres: {
+      url:   'https://cense.fr' + ROUTE,
+      title: 'Offres & fonctionnalités CENSE : comparatif des formules',
+      desc:  "Comparez en détail les offres CENSE : Basic, Essentiel, Avancé et Pilotage. Fonctionnalités incluses, tarifs et conditions, aux côtés de votre expert-comptable."
+    }
+  };
+
+  function set(sel, a, v){ var el=document.querySelector(sel); if(el) el.setAttribute(a, v); }
+  function appliquerMeta(m){
+    document.title = m.title;
+    set('meta[name="description"]','content',m.desc);
+    set('link[rel="canonical"]','href',m.url);
+    set('meta[property="og:url"]','content',m.url);
+    set('meta[property="og:title"]','content',m.title);
+    set('meta[property="og:description"]','content',m.desc);
+    set('meta[name="twitter:title"]','content',m.title);
+    set('meta[name="twitter:description"]','content',m.desc);
+  }
+
+  /* Fil d'ariane structure, present uniquement sur la vue Offres. */
+  function filDAriane(actif){
+    var id = 'ld-breadcrumb', old = document.getElementById(id);
+    if(old) old.parentNode.removeChild(old);
+    if(!actif) return;
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.id = id;
+    s.textContent = JSON.stringify({
+      "@context":"https://schema.org",
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Accueil","item":META.home.url},
+        {"@type":"ListItem","position":2,"name":"Offres & fonctionnalités","item":META.offres.url}
+      ]
+    });
+    document.head.appendChild(s);
+  }
+
+  /* Mesure d'audience : chaque changement de vue vaut une page vue. */
+  function suivi(m, chemin){
+    try{
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:'virtual_page_view', page_path:chemin, page_title:m.title});
+    }catch(e){}
+    try{
+      window._hsq = window._hsq || [];
+      window._hsq.push(['setPath', chemin]);
+      window._hsq.push(['trackPageView']);
+    }catch(e){}
+  }
+
+  var vueCourante = null;
+
+  function afficher(vue, opts){
+    opts = opts || {};
+    var estOffres = (vue === 'offres');
+    vOffres.hidden = !estOffres;
+    vHome.hidden   =  estOffres;
+    document.body.classList.toggle('route-offres', estOffres);
+
+    var lien = document.getElementById('lien-offres');
+    if(lien){ estOffres ? lien.setAttribute('aria-current','page') : lien.removeAttribute('aria-current'); }
+
+    var m = estOffres ? META.offres : META.home;
+    appliquerMeta(m);
+    filDAriane(estOffres);
+
+    /* Les blocs animes de la vue affichee doivent etre visibles meme si
+       l'observateur ne les a jamais croises pendant qu'ils etaient masques. */
+    if(!estOffres){
+      vHome.querySelectorAll('.reveal').forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight) el.classList.add('in');
+      });
+    }
+
+    try{
+      if(opts.ancre){
+        var cible = document.getElementById(opts.ancre);
+        if(cible){ cible.scrollIntoView({behavior:'smooth', block:'start'}); }
+        else { window.scrollTo(0,0); }
+      } else if(opts.hautDePage !== false){
+        window.scrollTo(0,0);
+      }
+    }catch(e){}
+
+    if(vue !== vueCourante){
+      vueCourante = vue;
+      if(opts.suivi !== false) suivi(m, estOffres ? ROUTE : '/');
+    }
+  }
+
+  function aller(vue, opts){
+    opts = opts || {};
+    var chemin = (vue === 'offres') ? ROUTE : '/';
+    if(opts.ancre) chemin += '#' + opts.ancre;
+    if(opts.push !== false && window.history && history.pushState){
+      history.pushState({vue:vue}, '', chemin);
+    }
+    afficher(vue, opts);
+  }
+
+  /* Interception des liens internes */
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a || a.target === '_blank' || a.hasAttribute('download') || a.hasAttribute('data-modal')) return;
+
+    var href = a.getAttribute('href');
+    if(!href) return;
+
+    /* Vers la vue Offres */
+    if(href === ROUTE || href === ROUTE + '/' || href === '#offres-fonctionnalites'){
+      e.preventDefault(); aller('offres', {push:true}); return;
+    }
+    /* Vers l'accueil, avec ou sans ancre */
+    if(href === '/' || href === '/#top'){
+      e.preventDefault(); aller('home', {push:true}); return;
+    }
+    if(href.indexOf('/#') === 0){
+      e.preventDefault(); aller('home', {push:true, ancre:href.slice(2)}); return;
+    }
+    /* Ancre simple depuis la vue Offres : on revient d'abord a l'accueil */
+    if(href.charAt(0) === '#' && href.length > 1 && vueCourante === 'offres'){
+      e.preventDefault(); aller('home', {push:true, ancre:href.slice(1)}); return;
+    }
+  });
+
+  window.addEventListener('popstate', function(){
+    afficher(routeCourante(), {push:false});
+  });
+
+  function routeCourante(){
+    var p = (location.pathname || '/').replace(/\/+$/,'');
+    if(p === ROUTE) return 'offres';
+    /* Solution de repli si la reecriture serveur n'est pas encore en place */
+    if(location.hash === '#offres-fonctionnalites') return 'offres';
+    if((location.search || '').indexOf('page=offres-fonctionnalites') > -1) return 'offres';
+    return 'home';
+  }
+
+  var depart = routeCourante();
+  if(depart === 'offres'){
+    afficher('offres', {push:false, hautDePage:true});
+  } else {
+    vueCourante = 'home';
+    if(location.hash && location.hash.length > 1){
+      var c = document.getElementById(location.hash.slice(1));
+      if(c) setTimeout(function(){ c.scrollIntoView(); }, 0);
+    }
   }
 })();
 </script>
