@@ -1650,6 +1650,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   var vueCourante = null;
 
+  /* L'API History exige une origine http(s). En consultation locale (file://)
+     ou si elle est indisponible, on bascule sur une navigation par ancre. */
+  var modeHistory = !!(window.history && window.history.pushState)
+                 && (location.protocol === 'http:' || location.protocol === 'https:');
+
   function afficher(vue, opts){
     opts = opts || {};
     var estOffres = (vue === 'offres');
@@ -1691,10 +1696,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function aller(vue, opts){
     opts = opts || {};
-    var chemin = (vue === 'offres') ? ROUTE : '/';
-    if(opts.ancre) chemin += '#' + opts.ancre;
-    if(opts.push !== false && window.history && history.pushState){
-      history.pushState({vue:vue}, '', chemin);
+    var ancre = opts.ancre ? '#' + opts.ancre : '';
+    if(opts.push !== false){
+      if(modeHistory){
+        try{
+          history.pushState({vue:vue}, '', ((vue === 'offres') ? ROUTE : '/') + ancre);
+        }catch(e){
+          modeHistory = false;   /* origine refusee : on repasse en mode ancre */
+        }
+      }
+      if(!modeHistory){
+        var h = (vue === 'offres') ? '#offres-fonctionnalites' : (ancre || '#top');
+        if(location.hash !== h) location.hash = h;
+      }
     }
     afficher(vue, opts);
   }
@@ -1727,6 +1741,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   window.addEventListener('popstate', function(){
     afficher(routeCourante(), {push:false});
+  });
+
+  /* En mode ancre, le bouton retour ne declenche que hashchange. */
+  window.addEventListener('hashchange', function(){
+    var r = routeCourante();
+    if(r !== vueCourante) afficher(r, {push:false, hautDePage:(r === 'offres')});
   });
 
   function routeCourante(){
