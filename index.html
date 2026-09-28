@@ -581,6 +581,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .modal-card p + p{margin-top:10px}
   .modal-card a{color:var(--c-prune);text-decoration:underline}
 
+  /* ===== Pages légales (routes /mentions-legales et /politique-de-confidentialite) ===== */
+  .legal-body{padding:56px 0 96px}
+  .legal-body .container{max-width:820px}
+  .legal-body .mh{font-family:var(--f-corps);text-transform:none;letter-spacing:0;
+    font-size:1.15rem;font-weight:700;color:var(--c-prune);margin:34px 0 10px;line-height:1.25}
+  .legal-body .mh:first-child{margin-top:0}
+  .legal-body p,.legal-body li{color:var(--c-prune-80);font-size:1rem;line-height:1.65}
+  .legal-body p + p,.legal-body ul + p,.legal-body p + ul{margin-top:12px}
+  .legal-body ul{padding-left:1.2em;list-style:disc}
+  .legal-body li + li{margin-top:4px}
+  .legal-body a{color:var(--c-prune);text-decoration:underline}
+  .legal-body a:hover{color:var(--c-rose)}
+
   /* ===== Tableau comparatif des offres ===== */
   /* Indicateur de defilement */
   .scroll-hint{display:none;align-items:center;gap:8px;
@@ -667,7 +680,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   /* ===== Vue Offres & fonctionnalites (route /offres-fonctionnalites) ===== */
-  #view-home[hidden],#view-offres[hidden]{display:none}
+  #view-home[hidden],#view-offres[hidden],#view-mentions[hidden],#view-confidentialite[hidden]{display:none}
   /* Bandeau d'entete sombre : signale sans ambiguite un changement de page. */
   .page-head{
     position:relative;overflow:hidden;padding:150px 0 66px;transition:padding-top .4s ease;
@@ -693,9 +706,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .page-head .lead{max-width:660px;font-size:clamp(1.05rem,1.5vw,1.22rem);color:rgba(255,255,255,.78)}
 
   /* Le logo et le bouton de connexion restent lisibles sur le bandeau sombre. */
-  body.route-offres header.site .logo g{fill:var(--c-blanc)}
-  body.route-offres header.site.scrolled .logo g{fill:var(--c-prune)}
-  body.route-offres header.site:not(.scrolled) .btn-login{background:var(--c-vert);color:var(--c-prune)}
+  body.route-page header.site .logo g{fill:var(--c-blanc)}
+  body.route-page header.site.scrolled .logo g{fill:var(--c-prune)}
+  body.route-page header.site:not(.scrolled) .btn-login{background:var(--c-vert);color:var(--c-prune)}
 
   /* Transition d'entree, pour que le changement de vue se percoive. */
   @keyframes vueEntre{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -1067,7 +1080,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="checks" style="margin-top:26px">
         <li><span class="ck"><svg class="ck-s" aria-hidden="true"><use href="#i-check"/></svg></span>Une réponse claire, sans engagement.</li>
         <li><span class="ck"><svg class="ck-s" aria-hidden="true"><use href="#i-check"/></svg></span>Un accompagnement adapté à votre activité.</li>
-        <li><span class="ck"><svg class="ck-s" aria-hidden="true"><use href="#i-check"/></svg></span>Vos données protégées, conformément au RGPD.</li>
+        <li><span class="ck"><svg class="ck-s" aria-hidden="true"><use href="#i-check"/></svg></span>Une plateforme sécurisée pour garantir la confidentialité de vos informations.</li>
       </ul>
     </div>
     <div class="reveal d1">
@@ -1305,6 +1318,114 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </div><!-- /#view-offres -->
 
+<!-- ============== VUE : MENTIONS LÉGALES (route /mentions-legales) ============== -->
+<div id="view-mentions" hidden>
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d'ariane">
+        <a href="/">Accueil</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Mentions légales</span>
+      </nav>
+      <span class="eyebrow light"><span class="dot" aria-hidden="true"></span>Informations légales</span>
+      <h1>Mentions <span class="accent">légales</span></h1>
+      <p class="lead">Informations relatives à l'éditeur et à l'hébergeur du site cense.fr.</p>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="container">
+        <h2 class="mh">Éditeur</h2>
+        <p>
+          COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES<br/>
+          Société par actions simplifiée au capital de 125 000 euros<br/>
+          Siège social : 1er étage, 4 place Sadi Carnot, 13002 Marseille<br/>
+          384 989 208 RCS Marseille
+        </p>
+        <!-- À compléter pour le nouvel éditeur (requis par la LCEN, art. 6) : téléphone, email de contact et directeur de la publication. -->
+
+        <h2 class="mh">Hébergement</h2>
+        <p>
+          INFORMATIQUE MARKETING SYSTEM<br/>
+          70 boulevard Marie et Alexandre Oyon<br/>
+          72100 Le Mans – France<br/>
+          Société certifiée ISO/IEC 27001:2022 pour ses prestations d'hébergement.
+        </p>
+
+        <h2 class="mh">Propriété intellectuelle</h2>
+        <p>L'ensemble des contenus du site est protégé par le droit de la propriété intellectuelle. Toute reproduction ou exploitation sans autorisation préalable est interdite.</p>
+
+        <h2 class="mh">Responsabilité</h2>
+        <p>
+          Le site est accessible 24h/24 et 7j/7 sauf interruption technique.<br/>
+          L'éditeur ne saurait être tenu responsable des éventuelles indisponibilités ou erreurs.
+        </p>
+    </div>
+  </section>
+</div><!-- /#view-mentions -->
+
+<!-- ============== VUE : POLITIQUE DE CONFIDENTIALITÉ (route /politique-de-confidentialite) ============== -->
+<div id="view-confidentialite" hidden>
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d'ariane">
+        <a href="/">Accueil</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Politique de confidentialité</span>
+      </nav>
+      <span class="eyebrow light"><span class="dot" aria-hidden="true"></span>Données personnelles</span>
+      <h1>Politique de <span class="accent">confidentialité</span></h1>
+      <p class="lead">Comment les données collectées sur le site cense.fr sont traitées, et comment exercer vos droits.</p>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="container">
+      <h2 class="mh">Responsable du traitement</h2>
+      <p>
+        COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES (« CPEM »)<br/>
+        4 place Sadi Carnot<br/>
+        13002 Marseille
+      </p>
+
+      <h2 class="mh">Données collectées</h2>
+      <p>Le site comporte un formulaire de contact. Les informations que vous y renseignez sont collectées : nom et prénom, adresse email, téléphone, code postal et, de manière facultative, entreprise et message.</p>
+      <p>Des données de navigation peuvent également être collectées via un outil de mesure d'audience de type Google Analytics :</p>
+      <ul>
+        <li>adresse IP anonymisée ;</li>
+        <li>type de terminal et navigateur ;</li>
+        <li>pages consultées ;</li>
+        <li>durée de navigation.</li>
+      </ul>
+      <p>Ces données de navigation ne permettent pas d'identifier directement les utilisateurs.</p>
+
+      <h2 class="mh">Finalités et bases légales</h2>
+      <p>Les données du formulaire de contact sont utilisées afin :</p>
+      <ul>
+        <li>de traiter et de répondre à votre demande ;</li>
+        <li>de vous transmettre des informations ou documents en lien avec votre demande ;</li>
+        <li>de permettre aux autres sociétés du groupe COGEP de vous présenter leurs services lorsqu'ils sont susceptibles d'intéresser votre activité professionnelle, sauf opposition de votre part.</li>
+      </ul>
+      <p>Ces traitements reposent sur l'intérêt légitime poursuivi par la CPEM et les sociétés du groupe COGEP consistant à gérer leurs relations avec leurs prospects, clients et partenaires professionnels et à promouvoir leurs services auprès d'un public professionnel.</p>
+      <p>Les cookies sont déposés à des fins d'amélioration du site et de mesure d'audience, uniquement après le recueil de votre consentement via le bandeau cookies. Ce consentement peut être retiré à tout moment.</p>
+
+      <h2 class="mh">Durées de conservation</h2>
+      <p>Les données collectées via le formulaire ne sont pas conservées au-delà de la durée nécessaire au traitement de votre demande et, en matière de prospection commerciale, 3 ans au maximum à compter de leur collecte ou du dernier contact émanant de votre part.</p>
+      <p>La durée de vie maximale d'un cookie est de 13 mois et la durée de conservation des données collectées par ce traceur est de 25 mois au maximum.</p>
+
+      <h2 class="mh">Destinataires</h2>
+      <p>Les données sont destinées à la CPEM.</p>
+      <p>Sous réserve de l'exercice de votre droit d'opposition, elles peuvent également être transmises aux autres sociétés du groupe COGEP afin qu'elles puissent vous présenter leurs services. Les sociétés du groupe COGEP destinataires des données agissent en qualité de responsables de traitement distincts pour les opérations de prospection qu'elles réalisent.</p>
+      <p>Vos données peuvent être traitées par Google LLC en qualité de sous-traitant, y compris hors Union européenne avec garanties appropriées.</p>
+
+      <h2 class="mh">Vos droits</h2>
+      <p>Conformément au RGPD, vous pouvez demander l'accès, la rectification, l'effacement, la portabilité des données vous concernant, demander une limitation du traitement ou vous y opposer.<br/>
+      Pour exercer ces droits, veuillez vous adresser à : <a href="mailto:dpo@cense.fr">dpo@cense.fr</a></p>
+      <p>Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>.</p>
+    </div>
+  </section>
+</div><!-- /#view-confidentialite -->
+
 </main>
 
 <!-- ============== FOOTER ============== -->
@@ -1346,100 +1467,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="foot-bottom">
       <span>© <span id="yr"></span> CENSE. Tous droits réservés.</span>
       <span class="foot-legal">
-        <button type="button" class="lk" data-modal="modal-mentions">Mentions légales</button>
-        <button type="button" class="lk" data-modal="modal-confidentialite">Politique de confidentialité</button>
+        <a class="lk" href="/mentions-legales">Mentions légales</a>
+        <a class="lk" href="/politique-de-confidentialite">Politique de confidentialité</a>
       </span>
       <span>Smart. Simple. Sensé(e). Donner du sens à l'essentiel.</span>
     </div>
   </div>
 </footer>
-
-<!-- ============== MODALE MENTIONS LÉGALES ============== -->
-<div class="modal" id="modal-mentions" hidden>
-  <div class="modal-backdrop" data-close></div>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="ml-title">
-    <button class="modal-close" type="button" data-close aria-label="Fermer">✕</button>
-    <h2 id="ml-title" class="modal-title">Mentions légales</h2>
-
-    <h3 class="mh">Éditeur</h3>
-    <p>
-      COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES<br/>
-      Société par actions simplifiée au capital de 125 000 euros<br/>
-      Siège social : 1er étage, 4 place Sadi Carnot, 13002 Marseille<br/>
-      384 989 208 RCS Marseille
-    </p>
-    <!-- À compléter pour le nouvel éditeur (requis par la LCEN, art. 6) : téléphone, email de contact et directeur de la publication. -->
-
-    <h3 class="mh">Hébergement</h3>
-    <p>
-      INFORMATIQUE MARKETING SYSTEM<br/>
-      70 boulevard Marie et Alexandre Oyon<br/>
-      72100 Le Mans – France<br/>
-      Société certifiée ISO/IEC 27001:2022 pour ses prestations d'hébergement.
-    </p>
-
-    <h3 class="mh">Propriété intellectuelle</h3>
-    <p>L'ensemble des contenus du site est protégé par le droit de la propriété intellectuelle. Toute reproduction ou exploitation sans autorisation préalable est interdite.</p>
-
-    <h3 class="mh">Responsabilité</h3>
-    <p>
-      Le site est accessible 24h/24 et 7j/7 sauf interruption technique.<br/>
-      L'éditeur ne saurait être tenu responsable des éventuelles indisponibilités ou erreurs.
-    </p>
-  </div>
-</div>
-
-<!-- ============== MODALE POLITIQUE DE CONFIDENTIALITÉ ============== -->
-<div class="modal" id="modal-confidentialite" hidden>
-  <div class="modal-backdrop" data-close></div>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pc-title">
-    <button class="modal-close" type="button" data-close aria-label="Fermer">✕</button>
-    <h2 id="pc-title" class="modal-title">Politique de confidentialité</h2>
-
-    <h3 class="mh">Responsable du traitement</h3>
-    <p>
-      COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES<br/>
-      4 place Sadi Carnot<br/>
-      13002 Marseille<br/>
-      Email : à préciser
-    </p>
-
-    <h3 class="mh">Données collectées</h3>
-    <p>
-      Le site comporte un formulaire de contact. Les informations que vous y renseignez sont collectées : nom et prénom, adresse email et, de manière facultative, téléphone, entreprise et message. Elles servent uniquement à traiter votre demande.<br/>
-      Des données de navigation peuvent également être collectées via un outil de mesure d'audience de type Google Analytics :<br/>
-      - adresse IP anonymisée<br/>
-      - type de terminal et navigateur<br/>
-      - pages consultées<br/>
-      - durée de navigation<br/>
-      Ces données de navigation ne permettent pas d'identifier directement les utilisateurs.
-    </p>
-
-    <h3 class="mh">Finalité</h3>
-    <p>Traitement de vos demandes de contact, mesure d'audience et amélioration du site.</p>
-
-    <h3 class="mh">Base légale</h3>
-    <p>
-      Les données du formulaire de contact sont traitées sur la base de votre consentement, recueilli lors de l'envoi du formulaire.<br/>
-      Les cookies de mesure d'audience sont déposés uniquement après consentement via le bandeau cookies.<br/>
-      Le consentement peut être retiré à tout moment.
-    </p>
-
-    <h3 class="mh">Durée de conservation</h3>
-    <p>Les données sont conservées pour une durée maximale de 13 mois.</p>
-
-    <h3 class="mh">Destinataires</h3>
-    <p>Les données sont destinées à la COMPAGNIE PHOCEENNE D'EQUIPEMENTS MULTISTES et peuvent être traitées par Google LLC en qualité de sous-traitant, y compris hors Union européenne avec garanties appropriées.</p>
-
-    <h3 class="mh">Vos droits</h3>
-    <p>
-      Conformément au RGPD, vous disposez des droits d'accès, de rectification, d'effacement, de limitation et d'opposition.<br/>
-      Pour les exercer :<br/>
-      Email : à préciser<br/>
-      Vous pouvez également saisir la CNIL.
-    </p>
-  </div>
-</div>
 
 <script>
   const hdr=document.getElementById('hdr');
@@ -1597,28 +1631,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 
-<!-- ===== Routeur : /offres-fonctionnalites servi par ce meme fichier ===== -->
+<!-- ===== Routeur : /offres-fonctionnalites, /mentions-legales et /politique-de-confidentialite servis par ce meme fichier ===== -->
 <script>
 (function(){
-  var ROUTE = '/offres-fonctionnalites';
-  var vHome   = document.getElementById('view-home');
-  var vOffres = document.getElementById('view-offres');
-  if(!vHome || !vOffres) return;
+  var vHome = document.getElementById('view-home');
+  if(!vHome) return;
 
-  /* Metadonnees de chaque vue. Celles de l'accueil sont lues dans le <head>. */
-  function attr(sel, a){ var el=document.querySelector(sel); return el ? el.getAttribute(a) : ''; }
-  var META = {
-    home: {
-      url:   'https://cense.fr/',
-      title: document.title,
-      desc:  attr('meta[name="description"]','content')
-    },
+  /* Pages secondaires : chemin, vue, libelle du fil d'ariane et metadonnees.
+     Chaque chemin doit etre reecrit cote serveur vers ce fichier. */
+  var PAGES = {
     offres: {
-      url:   'https://cense.fr' + ROUTE,
+      path:  '/offres-fonctionnalites',
+      el:    document.getElementById('view-offres'),
+      lien:  'lien-offres',
+      label: 'Offres & fonctionnalités',
       title: 'Offres & fonctionnalités CENSE : comparatif des formules',
       desc:  "Comparez en détail les offres CENSE : Basic, Essentiel, Avancé et Pilotage. Fonctionnalités incluses, tarifs et conditions, aux côtés de votre expert-comptable."
+    },
+    mentions: {
+      path:  '/mentions-legales',
+      el:    document.getElementById('view-mentions'),
+      label: 'Mentions légales',
+      title: 'Mentions légales | CENSE',
+      desc:  "Mentions légales du site cense.fr : éditeur, hébergeur, propriété intellectuelle et responsabilité."
+    },
+    confidentialite: {
+      path:  '/politique-de-confidentialite',
+      el:    document.getElementById('view-confidentialite'),
+      label: 'Politique de confidentialité',
+      title: 'Politique de confidentialité | CENSE',
+      desc:  "Politique de confidentialité du site cense.fr : données collectées, finalités, durées de conservation, destinataires et exercice de vos droits."
     }
   };
+  Object.keys(PAGES).forEach(function(k){ if(!PAGES[k].el) delete PAGES[k]; });
+
+  /* Metadonnees de l'accueil, lues dans le <head>. */
+  function attr(sel, a){ var el=document.querySelector(sel); return el ? el.getAttribute(a) : ''; }
+  var HOME = { url:'https://cense.fr/', title:document.title, desc:attr('meta[name="description"]','content') };
+  function meta(vue){
+    if(vue === 'home') return HOME;
+    var p = PAGES[vue];
+    return { url:'https://cense.fr' + p.path, title:p.title, desc:p.desc };
+  }
+  function chemin(vue){ return vue === 'home' ? '/' : PAGES[vue].path; }
 
   function set(sel, a, v){ var el=document.querySelector(sel); if(el) el.setAttribute(a, v); }
   function appliquerMeta(m){
@@ -1632,11 +1687,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     set('meta[name="twitter:description"]','content',m.desc);
   }
 
-  /* Fil d'ariane structure, present uniquement sur la vue Offres. */
-  function filDAriane(actif){
+  /* Fil d'ariane structure, present uniquement sur les pages secondaires. */
+  function filDAriane(vue){
     var id = 'ld-breadcrumb', old = document.getElementById(id);
     if(old) old.parentNode.removeChild(old);
-    if(!actif) return;
+    if(vue === 'home') return;
     var s = document.createElement('script');
     s.type = 'application/ld+json';
     s.id = id;
@@ -1644,22 +1699,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       "@context":"https://schema.org",
       "@type":"BreadcrumbList",
       "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"Accueil","item":META.home.url},
-        {"@type":"ListItem","position":2,"name":"Offres & fonctionnalités","item":META.offres.url}
+        {"@type":"ListItem","position":1,"name":"Accueil","item":HOME.url},
+        {"@type":"ListItem","position":2,"name":PAGES[vue].label,"item":meta(vue).url}
       ]
     });
     document.head.appendChild(s);
   }
 
   /* Mesure d'audience : chaque changement de vue vaut une page vue. */
-  function suivi(m, chemin){
+  function suivi(m, path){
     try{
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({event:'virtual_page_view', page_path:chemin, page_title:m.title});
+      window.dataLayer.push({event:'virtual_page_view', page_path:path, page_title:m.title});
     }catch(e){}
     try{
       window._hsq = window._hsq || [];
-      window._hsq.push(['setPath', chemin]);
+      window._hsq.push(['setPath', path]);
       window._hsq.push(['trackPageView']);
     }catch(e){}
   }
@@ -1673,21 +1728,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function afficher(vue, opts){
     opts = opts || {};
-    var estOffres = (vue === 'offres');
-    vOffres.hidden = !estOffres;
-    vHome.hidden   =  estOffres;
-    document.body.classList.toggle('route-offres', estOffres);
+    if(vue !== 'home' && !PAGES[vue]) vue = 'home';
+    vHome.hidden = (vue !== 'home');
+    Object.keys(PAGES).forEach(function(k){ PAGES[k].el.hidden = (k !== vue); });
+    document.body.classList.toggle('route-page', vue !== 'home');
+    document.body.classList.toggle('route-offres', vue === 'offres');
 
-    var lien = document.getElementById('lien-offres');
-    if(lien){ estOffres ? lien.setAttribute('aria-current','page') : lien.removeAttribute('aria-current'); }
+    Object.keys(PAGES).forEach(function(k){
+      var lien = PAGES[k].lien && document.getElementById(PAGES[k].lien);
+      if(lien){ k === vue ? lien.setAttribute('aria-current','page') : lien.removeAttribute('aria-current'); }
+    });
+    document.querySelectorAll('.foot-legal a').forEach(function(a){
+      (vue !== 'home' && a.getAttribute('href') === PAGES[vue].path) ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current');
+    });
 
-    var m = estOffres ? META.offres : META.home;
+    var m = meta(vue);
     appliquerMeta(m);
-    filDAriane(estOffres);
+    filDAriane(vue);
 
-    /* Les blocs animes de la vue affichee doivent etre visibles meme si
+    /* Les blocs animes de l'accueil doivent etre visibles meme si
        l'observateur ne les a jamais croises pendant qu'ils etaient masques. */
-    if(!estOffres){
+    if(vue === 'home'){
       vHome.querySelectorAll('.reveal').forEach(function(el){
         var r = el.getBoundingClientRect();
         if(r.top < window.innerHeight) el.classList.add('in');
@@ -1707,13 +1768,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(vue !== vueCourante){
       /* Breve animation d'entree : le changement de page doit se voir. */
       if(vueCourante !== null){
-        var cible2 = estOffres ? vOffres : vHome;
+        var cible2 = (vue === 'home') ? vHome : PAGES[vue].el;
         cible2.classList.remove('vue-entre');
         void cible2.offsetWidth;
         cible2.classList.add('vue-entre');
       }
       vueCourante = vue;
-      if(opts.suivi !== false) suivi(m, estOffres ? ROUTE : '/');
+      if(opts.suivi !== false) suivi(m, chemin(vue));
     }
   }
 
@@ -1723,17 +1784,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(opts.push !== false){
       if(modeHistory){
         try{
-          history.pushState({vue:vue}, '', ((vue === 'offres') ? ROUTE : '/') + ancre);
+          history.pushState({vue:vue}, '', chemin(vue) + ancre);
         }catch(e){
           modeHistory = false;   /* origine refusee : on repasse en mode ancre */
         }
       }
       if(!modeHistory){
-        var h = (vue === 'offres') ? '#offres-fonctionnalites' : (ancre || '#top');
+        var h = (vue === 'home') ? (ancre || '#top') : '#' + PAGES[vue].path.slice(1);
         if(location.hash !== h) location.hash = h;
       }
     }
     afficher(vue, opts);
+  }
+
+  /* Retrouve la vue correspondant a un lien interne. */
+  function vueDuLien(href){
+    var keys = Object.keys(PAGES);
+    for(var i=0;i<keys.length;i++){
+      var p = PAGES[keys[i]].path;
+      if(href === p || href === p + '/' || href === '#' + p.slice(1)) return keys[i];
+    }
+    return null;
   }
 
   /* Interception des liens internes */
@@ -1745,10 +1816,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var href = a.getAttribute('href');
     if(!href) return;
 
-    /* Vers la vue Offres */
-    if(href === ROUTE || href === ROUTE + '/' || href === '#offres-fonctionnalites'){
-      e.preventDefault(); aller('offres', {push:true}); return;
-    }
+    /* Vers une page secondaire */
+    var v = vueDuLien(href);
+    if(v){ e.preventDefault(); aller(v, {push:true}); return; }
+
     /* Vers l'accueil, avec ou sans ancre */
     if(href === '/' || href === '/#top'){
       e.preventDefault(); aller('home', {push:true}); return;
@@ -1756,8 +1827,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(href.indexOf('/#') === 0){
       e.preventDefault(); aller('home', {push:true, ancre:href.slice(2)}); return;
     }
-    /* Ancre simple depuis la vue Offres : on revient d'abord a l'accueil */
-    if(href.charAt(0) === '#' && href.length > 1 && vueCourante === 'offres'){
+    /* Ancre simple depuis une page secondaire : on revient d'abord a l'accueil */
+    if(href.charAt(0) === '#' && href.length > 1 && vueCourante !== 'home'){
       e.preventDefault(); aller('home', {push:true, ancre:href.slice(1)}); return;
     }
   });
@@ -1769,21 +1840,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   /* En mode ancre, le bouton retour ne declenche que hashchange. */
   window.addEventListener('hashchange', function(){
     var r = routeCourante();
-    if(r !== vueCourante) afficher(r, {push:false, hautDePage:(r === 'offres')});
+    if(r !== vueCourante) afficher(r, {push:false, hautDePage:(r !== 'home')});
   });
 
   function routeCourante(){
     var p = (location.pathname || '/').replace(/\/+$/,'');
-    if(p === ROUTE) return 'offres';
-    /* Solution de repli si la reecriture serveur n'est pas encore en place */
-    if(location.hash === '#offres-fonctionnalites') return 'offres';
-    if((location.search || '').indexOf('page=offres-fonctionnalites') > -1) return 'offres';
+    var keys = Object.keys(PAGES);
+    for(var i=0;i<keys.length;i++){
+      var slug = PAGES[keys[i]].path.slice(1);
+      if(p === PAGES[keys[i]].path) return keys[i];
+      /* Solutions de repli si la reecriture serveur n'est pas encore en place */
+      if(location.hash === '#' + slug) return keys[i];
+      if((location.search || '').indexOf('page=' + slug) > -1) return keys[i];
+    }
     return 'home';
   }
 
   var depart = routeCourante();
-  if(depart === 'offres'){
-    afficher('offres', {push:false, hautDePage:true});
+  if(depart !== 'home'){
+    afficher(depart, {push:false, hautDePage:true});
   } else {
     vueCourante = 'home';
     if(location.hash && location.hash.length > 1){
@@ -1797,7 +1872,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Banniere cookies -->
 
 <div class="cookie-banner" id="cookie-banner">
-  <p>Ce site utilise des cookies de mesure d'audience et de suivi publicitaire. Vous pouvez les accepter ou les refuser. <a data-modal="modal-confidentialite">En savoir plus</a></p>
+  <p>Ce site utilise des cookies de mesure d'audience et de suivi publicitaire. Vous pouvez les accepter ou les refuser. <a href="/politique-de-confidentialite">En savoir plus</a></p>
   <div class="cookie-buttons">
     <button type="button" class="ck-accept" data-consent="accepted">Accepter</button>
     <button type="button" class="ck-refuse" data-consent="refused">Refuser</button>
